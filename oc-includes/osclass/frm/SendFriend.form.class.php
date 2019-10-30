@@ -30,13 +30,13 @@
 		/**
 		 * @return bool
 		 */
-		public static function your_name() {
+		public static function your_name($attributes = '') {
 
             if( Session::newInstance()->_getForm( 'yourName' ) != '' ){
                 $yourName = Session::newInstance()->_getForm( 'yourName' );
-                parent::generic_input_text( 'yourName' , $yourName);
+                parent::generic_input_text( 'yourName' , $yourName, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'yourName' , '');
+                parent::generic_input_text( 'yourName' , '', null, false, true, $attributes);
             }
             return true;
         }
@@ -44,13 +44,13 @@
 		/**
 		 * @return bool
 		 */
-		public static function your_email() {
+		public static function your_email($attributes = '') {
 
             if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ){
                 $yourEmail = Session::newInstance()->_getForm( 'yourEmail' );
-                parent::generic_input_text( 'yourEmail' , $yourEmail);
+                parent::generic_input_text( 'yourEmail' , $yourEmail, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'yourEmail' , '');
+                parent::generic_input_text( 'yourEmail' , '', null, false, true, $attributes);
             }
             return true;
         }
@@ -58,12 +58,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function friend_name() {
+		public static function friend_name($attributes = '') {
             if( Session::newInstance()->_getForm( 'friendName' ) != '' ){
                 $friendName = Session::newInstance()->_getForm( 'friendName' );
-                parent::generic_input_text( 'friendName' , $friendName);
+                parent::generic_input_text( 'friendName' , $friendName, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'friendName' , '');
+                parent::generic_input_text( 'friendName' , '', null, false, true, $attributes);
             }
             return true;
         }
@@ -71,12 +71,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function friend_email() {
+		public static function friend_email($attributes = '') {
             if( Session::newInstance()->_getForm( 'friendEmail' ) != '' ){
                 $friendEmail = Session::newInstance()->_getForm( 'friendEmail' );
-                parent::generic_input_text( 'friendEmail' , $friendEmail);
+                parent::generic_input_text( 'friendEmail' , $friendEmail, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'friendEmail' , '');
+                parent::generic_input_text( 'friendEmail' , '', null, false, true, $attributes);
             }
             return true;
         }
@@ -84,12 +84,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function your_message() {
+		public static function your_message($attributes = '') {
             if( Session::newInstance()->_getForm( 'message_body' ) != '' ){
                 $message_body = Session::newInstance()->_getForm( 'message_body' );
-	            parent::generic_textarea( 'message' , $message_body );
+	            parent::generic_textarea( 'message' , $message_body, $attributes );
             } else {
-                parent::generic_textarea( 'message' , '' );
+                parent::generic_textarea( 'message' , '', $attributes );
             }
             return true;
         }

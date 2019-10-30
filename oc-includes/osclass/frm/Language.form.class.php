@@ -27,7 +27,7 @@
 		 * @param $locale
 		 */
 		public static function primary_input_hidden( $locale ) {
-            parent::generic_input_hidden( 'pk_c_code' , $locale[ 'pk_c_code' ]);
+            parent::generic_input_hidden( 'pk_c_code' , $locale[ 'pk_c_code' ], null, false, true, $attributes );
         }
 
 		/**
@@ -35,8 +35,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function name_input_text( $locale = null ) {
-            parent::generic_input_text( 's_name' , isset($locale) ? $locale['s_name'] : '' );
+		public static function name_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 's_name' , isset($locale) ? $locale['s_name'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -45,8 +45,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function short_name_input_text( $locale = null ) {
-            parent::generic_input_text( 's_short_name' , isset($locale) ? $locale['s_short_name'] : '' );
+		public static function short_name_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 's_short_name' , isset($locale) ? $locale['s_short_name'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -55,8 +55,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function description_input_text( $locale = null ) {
-            parent::generic_input_text( 's_description' , isset($locale) ? $locale['s_description'] : '' );
+		public static function description_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 's_description' , isset($locale) ? $locale['s_description'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -65,8 +65,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function currency_format_input_text( $locale = null ) {
-            parent::generic_input_text( 's_currency_format' , isset($locale) ? $locale['s_currency_format'] : '' );
+		public static function currency_format_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 's_currency_format' , isset($locale) ? $locale['s_currency_format'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -75,8 +75,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function dec_point_input_text( $locale = null ) {
-            parent::generic_input_text( 's_dec_point' , isset($locale) ? $locale['s_dec_point'] : '' );
+		public static function dec_point_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 's_dec_point' , isset($locale) ? $locale['s_dec_point'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -85,8 +85,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function num_dec_input_text( $locale = null ) {
-            parent::generic_input_text( 'i_num_dec' , isset($locale) ? $locale['i_num_dec'] : '' );
+		public static function num_dec_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 'i_num_dec' , isset($locale) ? $locale['i_num_dec'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -95,8 +95,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function thousands_sep_input_text( $locale = null ) {
-            parent::generic_input_text( 's_thousands_sep' , isset($locale) ? $locale['s_thousands_sep'] : '' );
+		public static function thousands_sep_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 's_thousands_sep' , isset($locale) ? $locale['s_thousands_sep'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -105,8 +105,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function date_format_input_text( $locale = null ) {
-            parent::generic_input_text( 's_date_format' , isset($locale) ? $locale['s_date_format'] : '' );
+		public static function date_format_input_text( $locale = null, $attributes = '' ) {
+            parent::generic_input_text( 's_date_format' , isset($locale) ? $locale['s_date_format'] : '', null, false, true, $attributes );
             return true;
         }
 
@@ -115,8 +115,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function description_textarea( $locale = null ) {
-            parent::generic_textarea( 's_stop_words' , $locale['s_stop_words']);
+		public static function description_textarea( $locale = null, $attributes = '' ) {
+            parent::generic_textarea( 's_stop_words' , $locale['s_stop_words'], $attributes );
             return true;
         }
 
@@ -125,8 +125,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function enabled_input_checkbox( $locale = null ) {
-			parent::generic_input_checkbox( 'b_enabled' , '1' , $locale[ 'b_enabled' ] == 1 );
+		public static function enabled_input_checkbox( $locale = null, $attributes = '' ) {
+			parent::generic_input_checkbox( 'b_enabled' , '1' , $locale[ 'b_enabled' ] == 1, $attributes );
             return true;
         }
 
@@ -135,8 +135,8 @@
 		 *
 		 * @return bool
 		 */
-		public static function enabled_bo_input_checkbox( $locale = null ) {
-			parent::generic_input_checkbox( 'b_enabled_bo' , '1' , $locale[ 'b_enabled_bo' ] == 1 );
+		public static function enabled_bo_input_checkbox( $locale = null, $attributes = '' ) {
+			parent::generic_input_checkbox( 'b_enabled_bo' , '1' , $locale[ 'b_enabled_bo' ] == 1 , $attributes);
             return true;
         }
 

@@ -119,8 +119,8 @@ FB;
 		 *
 		 * @return bool
 		 */
-		public static function name_input_text( $field = null ) {
-            parent::generic_input_text( 's_name' , ( isset($field) && isset($field[ 's_name' ])) ? $field[ 's_name' ] : '');
+		public static function name_input_text( $field = null, $attributes = '' ) {
+            parent::generic_input_text( 's_name' , ( isset($field) && isset($field[ 's_name' ])) ? $field[ 's_name' ] : '', null, false, true, $attributes);
             return true;
         }
 
@@ -129,23 +129,23 @@ FB;
 		 *
 		 * @return bool
 		 */
-		public static function options_input_text( $field = null ) {
-            parent::generic_input_text( 's_options' , ( isset($field) && isset($field[ 's_options' ])) ? html_entity_decode( $field[ 's_options' ]) : '');
+		public static function options_input_text( $field = null, $attributes ) {
+            parent::generic_input_text( 's_options' , ( isset($field) && isset($field[ 's_options' ])) ? html_entity_decode( $field[ 's_options' ]) : '', null, false, true, $attributes);
             return true;
         }
 
 		/**
 		 * @param null $field
 		 */
-		public static function required_checkbox( $field = null ) {
-			parent::generic_input_checkbox( 'field_required' , 1 , ( $field != null && isset( $field[ 'b_required' ] ) && $field[ 'b_required' ] == 1 ) );
+		public static function required_checkbox( $field = null, $attributes = '' ) {
+			parent::generic_input_checkbox( 'field_required' , 1 , ( $field != null && isset( $field[ 'b_required' ] ) && $field[ 'b_required' ] == 1 ), $attributes );
         }
 
 		/**
 		 * @param null $field
 		 */
-		public static function searchable_checkbox( $field = null ) {
-			parent::generic_input_checkbox( 'field_searchable' , 1 , ( $field != null && isset( $field[ 'b_searchable' ] ) && $field[ 'b_searchable' ] == 1 ) );
+		public static function searchable_checkbox( $field = null, $attributes = '' ) {
+			parent::generic_input_checkbox( 'field_searchable' , 1 , ( $field != null && isset( $field[ 'b_searchable' ] ) && $field[ 'b_searchable' ] == 1 ), $attributes );
         }
 
 		/**
@@ -153,9 +153,9 @@ FB;
 		 *
 		 * @return bool
 		 */
-		public static function type_select( $field = null ) {
+		public static function type_select( $field = null, $attributes = '' ) {
             ?>
-            <select name="field_type" id="field_type">
+            <select name="field_type" id="field_type" <?php echo $attributes; ?>>
                 <option value="TEXT" <?php if( $field['e_type'] === 'TEXT' ) { echo 'selected="selected"';} ?>><?php _e( 'TEXT'); ?></option>
                 <option value="TEXTAREA" <?php if( $field['e_type'] === 'TEXTAREA' ) { echo 'selected="selected"';} ?>><?php _e( 'TEXTAREA'); ?></option>
                 <option value="DROPDOWN" <?php if( $field['e_type'] === 'DROPDOWN' ) { echo 'selected="selected"';} ?>><?php _e( 'DROPDOWN'); ?></option>
@@ -173,7 +173,7 @@ FB;
 		 * @param null $field
 		 * @param bool $search
 		 */
-		public static function meta( $field = null , $search = false ) {
+		public static function meta( $field = null , $search = false, $attributes = '' ) {
 
             if($field!=null) {
                 // date interval
@@ -211,12 +211,12 @@ FB;
                 if( $field['e_type'] === 'TEXTAREA' ) {
                     if($search) {
                         echo '<h6>'.$field['s_name'].'</h6>';
-                        echo '<input id="meta_'.$field['s_slug'].'" type="text" name="meta['.$field['pk_i_id'].']" value="' . osc_esc_html((isset($field) && isset($field[ 's_value' ])) ? $field[ 's_value' ] : '' ) . '" />';
+                        echo '<input id="meta_'.$field['s_slug'].'" type="text" name="meta['.$field['pk_i_id'].']" value="' . osc_esc_html((isset($field) && isset($field[ 's_value' ])) ? $field[ 's_value' ] : '' ) . '" '.$attributes.'/>';
                     } else {
 			$field_textarea_value = isset($field[ 's_value' ]) ? $field[ 's_value' ] : '';
 			$field_textarea_value = osc_apply_filter('osc_item_edit_meta_textarea_value_filter', $field_textarea_value, $field);
                         echo '<label for="meta_'.$field['s_slug'].'">'.$field['s_name'].': </label>';
-                        echo '<textarea id="meta_' . $field['s_slug'] . '" name="meta['.$field['pk_i_id'].']" rows="10">' . ((isset($field) && isset($field_textarea_value)) ? $field_textarea_value : '' ) . '</textarea>';
+                        echo '<textarea id="meta_' . $field['s_slug'] . '" name="meta['.$field['pk_i_id'].']" rows="10" '.$attributes.'>' . ((isset($field) && isset($field_textarea_value)) ? $field_textarea_value : '' ) . '</textarea>';
                     }
                 } else if( $field['e_type'] === 'DROPDOWN' ) {
                     if($search) {
@@ -227,7 +227,7 @@ FB;
                     if(isset($field) && isset($field['s_options'])) {
                         $options = explode( ',' , $field['s_options']);
                         if(count($options)>0) {
-                            echo '<select name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '">';
+                            echo '<select name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '" '.$attributes.'>';
                             if($search) {
                                 echo '<option value="">'. __('Select', 'osclass')." ". $field['s_name'].'</option>';
                             }
@@ -245,7 +245,7 @@ FB;
                             $options = explode( ',' , $field['s_options']);
                             if(count($options)>0) {
                                 foreach($options as $key => $option) {
-                                    echo '<label for="meta_' . $field['s_slug'] . '_'.$key.'"><input type="radio" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '_'.$key.'" value="'.osc_esc_html($option).'"'.($field['s_value']==$option?' checked="checked"':'').' />'.$option.'</label><br/>';
+                                    echo '<label for="meta_' . $field['s_slug'] . '_'.$key.'"><input type="radio" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '_'.$key.'" value="'.osc_esc_html($option).'"'.($field['s_value']==$option?' checked="checked"':'').' '.$attributes.'/>'.$option.'</label><br/>';
                                 }
                             }
                         }
@@ -256,7 +256,7 @@ FB;
                             if(count($options)>0) {
                                 echo '<ul>';
                                 foreach($options as $key => $option) {
-                                    echo '<li><input type="radio" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '_'.$key.'" value="'.osc_esc_html($option).'"'.($field['s_value']==$option?' checked="checked"':'').' /><label for="meta_' . $field['s_slug'] . '_'.$key.'">'.$option.'</label></li>';
+                                    echo '<li><input type="radio" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '_'.$key.'" value="'.osc_esc_html($option).'"'.($field['s_value']==$option?' checked="checked"':'').' /><label for="meta_' . $field['s_slug'] . '_'.$key.'" '.$attributes.'>'.$option.'</label></li>';
                                 }
                                 echo '</ul>';
                             }
@@ -264,7 +264,7 @@ FB;
                     }
                 } else if( $field['e_type'] === 'CHECKBOX' ) {
                     if(isset($field) && isset($field['s_options'])) {
-                        echo '<input type="checkbox" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] .'" value="1"'.((isset($field) && isset($field['s_value']) && $field['s_value']==1)?' checked="checked"':'').' />';
+                        echo '<input type="checkbox" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] .'" value="1"'.((isset($field) && isset($field['s_value']) && $field['s_value']==1)?' checked="checked"':'').' '.$attributes.' />';
                         echo '<label for="meta_'.$field['s_slug'].'">'. $field['s_name'].' </label>';
                     }
                 } else if( $field['e_type'] === 'DATE' ) {
@@ -275,7 +275,7 @@ FB;
                     }
                     // timestamp/1000 (javascript timestamp)
                     echo '<input type="hidden" id="meta_'.$field['s_slug'].'" name="meta['.$field['pk_i_id'].']" value="" />';
-                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].' cf_date" value="" />';
+                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].' cf_date" value="" '.$attributes.' />';
 	                self::initDatePicker( 'meta_' . $field[ 's_slug' ] , osc_date_format() , $field[ 's_value' ] );
 
                 } else if( $field['e_type'] === 'DATEINTERVAL' ) {
@@ -287,12 +287,12 @@ FB;
 
                     echo __('from'). ' ';
                     echo '<input type="hidden" id="meta_'.$field['s_slug'].'_from" name="meta['.$field['pk_i_id'].'][from]" value="'.$field['s_value']['from'].'" />';
-                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].'_from cf_date_interval" value="" />';
+                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].'_from cf_date_interval" value="" '.$attributes.' />';
 	                self::initDatePicker( 'meta_' . $field[ 's_slug' ] . '_from' , osc_date_format() , $field[ 's_value' ][ 'from' ] , 'from' );
 
                     echo ' ' . __('to'). ' ';
                     echo '<input type="hidden" id="meta_'.$field['s_slug'].'_to" name="meta['.$field['pk_i_id'].'][to]" value="'.$field['s_value']['to'].'" />';
-                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].'_to cf_date_interval" value="" />';
+                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].'_to cf_date_interval" value="" '.$attributes.' />';
 	                self::initDatePicker( 'meta_' . $field[ 's_slug' ] . '_to' , osc_date_format() , $field[ 's_value' ][ 'to' ] , 'to' );
 
                 } else {
@@ -301,7 +301,7 @@ FB;
                     } else {
                         echo '<label for="meta_'.$field['s_slug'].'">'.$field['s_name'].': </label>';
                     }
-                    echo '<input id="meta_'.$field['s_slug'].'" type="text" name="meta['.$field['pk_i_id'].']" value="' . osc_esc_html((isset($field) && isset($field[ 's_value' ])) ? $field[ 's_value' ] : '' ) . '" />';
+                    echo '<input id="meta_'.$field['s_slug'].'" type="text" name="meta['.$field['pk_i_id'].']" value="' . osc_esc_html((isset($field) && isset($field[ 's_value' ])) ? $field[ 's_value' ] : '' ) . '" '.$attributes.' />';
                 }
             }
         }

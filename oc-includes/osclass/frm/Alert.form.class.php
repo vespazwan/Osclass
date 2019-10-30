@@ -49,12 +49,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function email_text() {
+		public static function email_text($attributes = '') {
             $value = '';
             if( osc_logged_user_email() == '' ){
                 $value = self::default_email_text();
             }
-            parent::generic_input_text('alert_email', $value );
+            parent::generic_input_text('alert_email', $value, null, false, true, $attributes);
             return true;
         }
 
@@ -74,4 +74,3 @@
             return true;
         }
     }
-

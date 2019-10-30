@@ -50,12 +50,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function your_name() {
+		public static function your_name($attributes = '') {
             if( Session::newInstance()->_getForm( 'yourName' ) != '' ) {
                 $name = Session::newInstance()->_getForm( 'yourName' );
-                parent::generic_input_text( 'yourName' , $name);
+                parent::generic_input_text( 'yourName' , $name, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'yourName' , osc_logged_user_name());
+                parent::generic_input_text( 'yourName' , osc_logged_user_name(), null, false, true, $attributes);
             }
             return true;
         }
@@ -63,12 +63,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function your_email() {
+		public static function your_email($attributes = '') {
              if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ) {
                 $email = Session::newInstance()->_getForm( 'yourEmail' );
-                parent::generic_input_text( 'yourEmail' , $email);
+                parent::generic_input_text( 'yourEmail' , $email, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'yourEmail' , osc_logged_user_email());
+                parent::generic_input_text( 'yourEmail' , osc_logged_user_email(), null, false, true, $attributes);
             }
             return true;
         }
@@ -76,12 +76,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function your_phone_number() {
+		public static function your_phone_number($attributes = '') {
             if( Session::newInstance()->_getForm( 'phoneNumber' ) != '' ) {
                 $phoneNumber = Session::newInstance()->_getForm( 'phoneNumber' );
-                parent::generic_input_text( 'phoneNumber' , $phoneNumber);
+                parent::generic_input_text( 'phoneNumber' , $phoneNumber, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'phoneNumber' , osc_logged_user_phone());
+                parent::generic_input_text( 'phoneNumber' , osc_logged_user_phone(), null, false, true, $attributes);
             }
             return true;
         }
@@ -89,12 +89,12 @@
 		/**
 		 * @return bool
 		 */
-		public static function the_subject() {
+		public static function the_subject($attributes = '') {
             if( Session::newInstance()->_getForm( 'subject' ) != '' ) {
                 $subject = Session::newInstance()->_getForm( 'subject' );
-                parent::generic_input_text( 'subject' , $subject);
+                parent::generic_input_text( 'subject' , $subject, null, false, true, $attributes);
             } else {
-                parent::generic_input_text( 'subject' , '');
+                parent::generic_input_text( 'subject' , '', null, false, true, $attributes);
             }
             return true;
         }
@@ -102,18 +102,18 @@
 		/**
 		 * @return bool
 		 */
-		public static function your_message() {
+		public static function your_message($attributes = '') {
             if( Session::newInstance()->_getForm( 'message_body' ) != '' ) {
                 $message = Session::newInstance()->_getForm( 'message_body' );
-                parent::generic_textarea( 'message' , $message);
+                parent::generic_textarea( 'message' , $message, $attributes);
             } else {
-                parent::generic_textarea( 'message' , '' );
+                parent::generic_textarea( 'message' , '', $attributes);
             }
             return true;
         }
 
-        public static function your_attachment() {
-            echo '<input type="file" name="attachment" />';
+        public static function your_attachment($attributes = '') {
+            echo '<input type="file" name="attachment" '.$attributes.'/>';
         }
 
         public static function js_validation() {
