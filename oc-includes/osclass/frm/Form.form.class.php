@@ -1,6 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
-}
+<?php
+if ( ! defined( 'ABS_PATH' ) ) { exit( 'ABS_PATH is not loaded. Direct access is not allowed.' ); }
 
 /*
  * Copyright 2014 Osclass
@@ -30,9 +29,9 @@
 		 * @param $default_item
 		 * @param $id
 		 */
-		protected static function generic_select( $name , $items , $fld_key , $fld_name , $default_item , $id ) {
-            $name = osc_esc_html($name);
-            echo '<select name="' . $name . '" id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '">';
+		protected static function generic_select( $name , $items , $fld_key , $fld_name , $default_item , $id, $attributes = '' ) {
+    		$name = osc_esc_html($name);
+            echo '<select name="' . $name . '" id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" '.$attributes.'>';
 	        if ( isset( $default_item ) ) {
 		        echo '<option value="">' . $default_item . '</option>';
 	        }
@@ -51,7 +50,7 @@
 		 * @param bool $readOnly
 		 * @param bool $autocomplete
 		 */
-		protected static function generic_input_text( $name , $value , $maxLength = null , $readOnly = false , $autocomplete = true ) {
+		protected static function generic_input_text( $name , $value , $maxLength = null , $readOnly = false , $autocomplete = true, $attributes = '' ) {
             $name = osc_esc_html($name);
             echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities( $value, ENT_COMPAT, 'UTF-8' )) . '"';
 	        if ( isset( $maxLength ) ) {
@@ -63,6 +62,10 @@
 	        if ( $readOnly ) {
 		        echo ' disabled="disabled" readonly="readonly"';
 	        }
+			if ( $attributes != '' ) {
+				echo ' '.$attributes;
+			}
+
             echo ' />';
         }
 
@@ -72,7 +75,7 @@
 		 * @param null $maxLength
 		 * @param bool $readOnly
 		 */
-		protected static function generic_password( $name , $value , $maxLength = null , $readOnly = false ) {
+		protected static function generic_password( $name , $value , $maxLength = null , $readOnly = false, $attributes = '' ) {
             $name = osc_esc_html($name);
             echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" type="password" name="' . $name . '" value="' . osc_esc_html(htmlentities( $value, ENT_COMPAT, 'UTF-8' )) . '"';
 	        if ( isset( $maxLength ) ) {
@@ -81,6 +84,10 @@
 	        if ( $readOnly ) {
 		        echo ' disabled="disabled" readonly="readonly"';
 	        }
+			if ( $attributes != '' ) {
+				echo ' '.$attributes;
+			}
+
             echo ' autocomplete="off" />';
         }
 
@@ -88,9 +95,9 @@
 		 * @param $name
 		 * @param $value
 		 */
-		protected static function generic_input_hidden( $name , $value ) {
+		protected static function generic_input_hidden( $name , $value, $attributes = '' ) {
             $name = osc_esc_html($name);
-            echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" type="hidden" name="' . $name . '" value="' . osc_esc_html(htmlentities( $value, ENT_COMPAT, 'UTF-8' )) . '" />';
+            echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" type="hidden" name="' . $name . '" value="' . osc_esc_html(htmlentities( $value, ENT_COMPAT, 'UTF-8' )) . '" '.$attributes.' />';
         }
 
 		/**
@@ -98,12 +105,16 @@
 		 * @param      $value
 		 * @param bool $checked
 		 */
-		protected static function generic_input_checkbox( $name , $value , $checked = false ) {
+		protected static function generic_input_checkbox( $name , $value , $checked = false, $attributes = '' ) {
             $name = osc_esc_html($name);
             echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" type="checkbox" name="' . $name . '" value="' . osc_esc_html(htmlentities( $value, ENT_COMPAT, 'UTF-8' )) . '"';
 	        if ( $checked ) {
 		        echo ' checked="checked"';
 	        }
+			if ( $attributes != '' ) {
+				echo ' '.$attributes;
+			}
+
             echo ' />';
         }
 
@@ -111,11 +122,9 @@
 		 * @param $name
 		 * @param $value
 		 */
-		protected static function generic_textarea( $name , $value ) {
+		protected static function generic_textarea( $name , $value, $attributes = '' ) {
             $name = osc_esc_html($name);
-            echo '<textarea id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" name="' . $name . '" rows="10">' . $value . '</textarea>';
+            echo '<textarea id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" name="' . $name . '" rows="10" '.$attributes.'>' . $value . '</textarea>';
         }
 
     }
-
-
